@@ -4,6 +4,9 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
+import trinity.Game;
+import trinity.Key;
+
 public class Player extends Pawn {
 
 	public Player() {
@@ -11,7 +14,24 @@ public class Player extends Pawn {
 	}
 
 	public Player(Point2D.Float pos, int layer) {
-		super(pos, layer);
+		super(pos, layer, 0, 0, 0, 0);
+	}
+
+	@Override
+	public void update() {
+		if (Key.getKey("up").held) {
+			target.y -= 30;
+		}
+		if (Key.getKey("down").held) {
+			target.y += 30;
+		}
+		if (Key.getKey("left").held) {
+			target.x -= 30;
+		}
+		if (Key.getKey("right").held) {
+			target.x += 30;
+		}
+		super.update();
 	}
 
 	@Override
