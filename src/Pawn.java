@@ -30,7 +30,7 @@ public class Pawn extends trinity.Entity {
 
 	@Override
 	public void update() {
-		move(target, Math.max(0, 3f));
+		move(target, Math.min(0.1f, 3f));
 		target.x = pos.x;
 		target.y = pos.y;
 		

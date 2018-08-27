@@ -14,7 +14,7 @@ public class Player extends Pawn {
 	}
 
 	public Player(Point2D.Float pos, int layer) {
-		super(pos, layer, 0, 0, 0, 0);
+		super(pos, layer, 0, 0, 0.3f, 0);
 	}
 
 	@Override
