@@ -1,14 +1,13 @@
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Point2D;
 import java.net.MalformedURLException;
 
 import trinity.Game;
 import trinity.Key;
 import trinity.Level;
 import trinity.Render;
-import trinity.MenuItem;
+import trinity.Twin;
 
 public class Cartridge extends trinity.Level {
 
@@ -26,7 +25,7 @@ public class Cartridge extends trinity.Level {
 		images.put("checker", Render.loadImage("checker.png"));
 		levels.put("Menu", new Level());
 		currentLevel = levels.get("Menu");
-		currentLevel.entities.add(new Player(new Point2D.Float(10, 10), 0));
+		currentLevel.entities.add(new Player(new Twin(10, 10), 0));
 		Key.keys.add(new Key(KeyEvent.VK_UP, "up", false));
 		Key.keys.add(new Key(KeyEvent.VK_DOWN, "down", false));
 		Key.keys.add(new Key(KeyEvent.VK_LEFT, "left", false));

@@ -3,10 +3,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Float;
+
 
 import trinity.Game;
 import trinity.Key;
+import trinity.Render;
+import trinity.Twin;
 
 public class Player extends Pawn {
 
@@ -14,7 +16,7 @@ public class Player extends Pawn {
 		super();
 	}
 
-	public Player(Point2D.Float pos, int layer) {
+	public Player(Twin pos, int layer) {
 		super(pos, layer, 0, 0, 0.3f, 0);
 	}
 
@@ -38,6 +40,7 @@ public class Player extends Pawn {
 	@Override
 	public void draw(Graphics2D g, int layer) {
 		super.draw(g, layer);
+		Render.drawImage(g, image2, pos, false, false, 90);
 		g.setColor(Color.BLACK);
 		g.drawString(health + "", 10, 100);
 	}

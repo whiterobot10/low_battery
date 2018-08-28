@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 
 import trinity.Entity;
@@ -12,14 +11,16 @@ import trinity.Game;
 import trinity.Level;
 import trinity.Stat;
 import trinity.StatMod;
+import trinity.Twin;
 
 public class Pawn extends trinity.Entity {
 
 	public static BufferedImage image = Level.images.get("checker");
-	public Point2D.Float target = new Point2D.Float(0, 0);
+	public static BufferedImage image2 = Level.images.get("pointer");
+	public Twin target = new Twin(0, 0);
 
 	public Pawn() {
-		this(new Point2D.Float(0, 0), 0, 0, 0, 0, 0);
+		this(new Twin(0, 0), 0, 0, 0, 0, 0);
 	}
 
 	Stat speed;
@@ -41,7 +42,7 @@ public class Pawn extends trinity.Entity {
 		loot.update();
 	}
 
-	public Pawn(Point2D.Float pos, int layer, float maxHealth, float maxPower, float speed, float loot) {
+	public Pawn(trinity.Twin pos, int layer, float maxHealth, float maxPower, float speed, float loot) {
 		super(pos, layer, true);
 		target.x = pos.x;
 		target.y = pos.y;
