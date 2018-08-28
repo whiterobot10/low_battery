@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
@@ -35,7 +36,7 @@ public class Player extends Pawn {
 	}
 
 	@Override
-	public void draw(Graphics g, int layer) {
+	public void draw(Graphics2D g, int layer) {
 		super.draw(g, layer);
 		g.setColor(Color.BLACK);
 		g.drawString(health + "", 10, 100);
