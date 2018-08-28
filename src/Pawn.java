@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
@@ -60,7 +61,7 @@ public class Pawn extends trinity.Entity {
 	}
 
 	@Override
-	public void draw(Graphics g, int layer) {
+	public void draw(Graphics2D g, int layer) {
 		if (layer == this.layer) {
 			drawSegment(g, image, pos);
 			if (Game.debug) {
