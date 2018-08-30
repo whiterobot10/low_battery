@@ -16,7 +16,7 @@ import trinity.Twin;
 public class Pawn extends trinity.Entity {
 
 	public static BufferedImage image = Level.images.get("checker");
-	public static BufferedImage image2 = Level.images.get("pointer");
+	public static BufferedImage image2 = Level.images.get("pointer2");
 	public Twin target = new Twin(0, 0);
 
 	public Pawn() {
@@ -32,10 +32,10 @@ public class Pawn extends trinity.Entity {
 
 	@Override
 	public void update() {
-		move(target, Math.min(0.1f, 3f));
+		move(target, Math.min(speed.value, 3f));
 		target.x = pos.x;
 		target.y = pos.y;
-		
+
 		speed.update();
 		maxHealth.update();
 		maxPower.update();
@@ -57,14 +57,14 @@ public class Pawn extends trinity.Entity {
 		amount *= 0.9 + Game.random.nextFloat() / 5;
 		health -= amount;
 		if (type.equals("power")) {
-			loot.addMod(new StatMod((maxHealth.getValue() / amount) / 2, true));
+			loot.addMod(new StatMod((maxHealth.value / amount) / 2, true));
 		}
 	}
 
 	@Override
 	public void draw(Graphics2D g, int layer) {
 		if (layer == this.layer) {
-			drawSegment(g, image, pos);
+			//drawSegment(g, image);
 			if (Game.debug) {
 				g.setColor(Color.red);
 				Rectangle foo = hitbox.getBounds();
