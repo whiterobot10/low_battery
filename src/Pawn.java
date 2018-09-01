@@ -20,7 +20,7 @@ public class Pawn extends trinity.Entity {
 	public Twin target = new Twin(0, 0);
 
 	public Pawn() {
-		this(new Twin(0, 0), 0, 0, 0, 0, 0);
+		this(new Twin(0, 0), 0, 0, 0, 0);
 	}
 
 	Stat speed;
@@ -42,8 +42,8 @@ public class Pawn extends trinity.Entity {
 		loot.update();
 	}
 
-	public Pawn(trinity.Twin pos, int layer, float maxHealth, float maxPower, float speed, float loot) {
-		super(pos, layer, true);
+	public Pawn(trinity.Twin pos, float maxHealth, float maxPower, float speed, float loot) {
+		super(pos, true);
 		target.x = pos.x;
 		target.y = pos.y;
 		this.speed = new Stat(speed);
@@ -52,7 +52,7 @@ public class Pawn extends trinity.Entity {
 		this.loot = new Stat(loot);
 	}
 
-	@Override
+
 	public void damage(float amount, String type) {
 		amount *= 0.9 + Game.random.nextFloat() / 5;
 		health -= amount;
@@ -63,7 +63,7 @@ public class Pawn extends trinity.Entity {
 
 	@Override
 	public void draw(Graphics2D g, int layer) {
-		if (layer == this.layer) {
+		if (layer == 2) {
 			//drawSegment(g, image);
 			if (Game.debug) {
 				g.setColor(Color.red);

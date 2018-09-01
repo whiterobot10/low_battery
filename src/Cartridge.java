@@ -8,6 +8,7 @@ import trinity.Key;
 import trinity.Level;
 import trinity.Render;
 import trinity.Twin;
+import trinity.Wall;
 
 public class Cartridge extends trinity.Level {
 
@@ -35,7 +36,7 @@ public class Cartridge extends trinity.Level {
 
 			images.put("player.head", Render.loadImage("pawn/player/head.png"));
 			images.put("player.body", Render.loadImage("pawn/player/body.png"));
-			
+
 			images.put("player.leg.0", Render.loadImage("pawn/player/leg_0.png"));
 			images.put("player.leg.1", Render.loadImage("pawn/player/leg_1.png"));
 			// images.put("player.legs.0", Render.loadImage("pawn/player/outer_arm.png"));
@@ -49,7 +50,8 @@ public class Cartridge extends trinity.Level {
 		images.put("laser", Render.loadImage("laser2.png"));
 		levels.put("Menu", new Level());
 		currentLevel = levels.get("Menu");
-		currentLevel.entities.add(new Player(new Twin(50, 50), 0));
+		currentLevel.entities.add(new Player(new Twin(50, 50)));
+		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(10, 10)));
 		Key.keys.add(new Key(KeyEvent.VK_UP, "up", false));
 		Key.keys.add(new Key(KeyEvent.VK_DOWN, "down", false));
 		Key.keys.add(new Key(KeyEvent.VK_LEFT, "left", false));
@@ -58,6 +60,8 @@ public class Cartridge extends trinity.Level {
 		Key.keys.add(new Key(KeyEvent.VK_S, "down_2", false));
 		Key.keys.add(new Key(KeyEvent.VK_A, "left_2", false));
 		Key.keys.add(new Key(KeyEvent.VK_D, "right_2", false));
+
+		Render.canvasLayers = 10;
 	}
 
 }
