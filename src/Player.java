@@ -58,7 +58,7 @@ public class Player extends Pawn {
 		if (Key.getKey("menu_enter").pressed) {
 			test += 1;
 		}
-		if (pos.distance(target) > 1) {
+		if (pos.distance(target) > 1 && move(target, Math.min(speed.value, 3f))) {
 			walkCycle += speed.value;
 		} else {
 			walkCycle = 0;
@@ -66,7 +66,14 @@ public class Player extends Pawn {
 		while (walkCycle > 10) {
 			walkCycle -= 10;
 		}
-		super.update();
+
+		target.x = pos.x;
+		target.y = pos.y;
+
+		speed.update();
+		maxHealth.update();
+		maxPower.update();
+		loot.update();
 
 	}
 

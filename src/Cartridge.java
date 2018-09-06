@@ -20,7 +20,7 @@ public class Cartridge extends trinity.Level {
 		} catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		Render.fixDisplay(new Dimension(100, 100));
+		Render.fixDisplay(new Dimension(200, 100));
 
 		Game.currentName = "low_battery";
 		{
@@ -51,7 +51,7 @@ public class Cartridge extends trinity.Level {
 		levels.put("Menu", new Level());
 		currentLevel = levels.get("Menu");
 		currentLevel.entities.add(new Player(new Twin(50, 50)));
-		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(10, 10)));
+		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(100, 10)));
 		Key.keys.add(new Key(KeyEvent.VK_UP, "up", false));
 		Key.keys.add(new Key(KeyEvent.VK_DOWN, "down", false));
 		Key.keys.add(new Key(KeyEvent.VK_LEFT, "left", false));
