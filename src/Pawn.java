@@ -1,12 +1,9 @@
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
-import trinity.Entity;
 import trinity.Game;
 import trinity.Level;
 import trinity.Stat;
@@ -32,7 +29,7 @@ public class Pawn extends trinity.Entity {
 
 	@Override
 	public void update() {
-		move(target, Math.min(speed.value, 3f));
+		moveTwords(target, Math.min(speed.value, 3f));
 		target.x = pos.x;
 		target.y = pos.y;
 
@@ -52,19 +49,18 @@ public class Pawn extends trinity.Entity {
 		this.loot = new Stat(loot);
 	}
 
-
-	public void damage(float amount, String type) {
+	public void damage(float amount, float shock) {
 		amount *= 0.9 + Game.random.nextFloat() / 5;
 		health -= amount;
-		if (type.equals("power")) {
-			loot.addMod(new StatMod((maxHealth.value / amount) / 2, true));
-		}
+
+		loot.addMod(new StatMod((maxHealth.value / amount) * shock, true));
+
 	}
 
 	@Override
 	public void draw(Graphics2D g, int layer) {
 		if (layer == 2) {
-			//drawSegment(g, image);
+			// drawSegment(g, image);
 			if (Game.debug) {
 				g.setColor(Color.red);
 				Rectangle foo = hitbox.getBounds();
