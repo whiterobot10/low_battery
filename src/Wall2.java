@@ -7,19 +7,39 @@ import trinity.Twin;
 
 public class Wall2 extends Tile {
 
+	protected static final String[] connectableIds = { "wall2" };
+	protected static final BufferedImage tileset = Level.images.get("tileset.wall2");
+	protected static final String id = "wall2";
+	protected static final int size = 16;
+	protected static final int layer = 0;
 
-	public Wall2() {
-		this(0, 0);
+	public String[] getConnectableIds() {
+		return connectableIds;
 	}
 
-	public Wall2(int x, int y) {
-		super(x, y);
-		size = 16;
-		layer = 0;
-		tileset=Level.images.get("tileset.wall2");
-		connectableIds = new String[1];
-		connectableIds[0] = "wall2";
-		id = "wall2";
+	public BufferedImage getImage() {
+		return tileset;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public int getLayer() {
+		return layer;
+	}
+
+	public Wall2() {
+		this(new Twin(0, 0));
+	}
+
+	public Wall2(Twin pos) {
+		super(pos);
+
 	}
 
 }

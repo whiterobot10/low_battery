@@ -5,19 +5,19 @@ import trinity.Level;
 import trinity.Tile;
 import trinity.Twin;
 
-public class Wall1 extends Tile {
+public class Cube1 extends Tile {
 
-	public Wall1(Twin pos) {
+	public Cube1(Twin pos) {
 		super(pos);
 	}
 
-	public Wall1() {
+	public Cube1() {
 		this(new Twin(0, 0));
 	}
 
-	protected static final String[] connectableIds = { null, "wall1", "Wall2" };
-	protected static final BufferedImage tileset = Level.images.get("tileset.wall1");
-	protected static final String id = "wall1";
+	protected static final String[] connectableIds = { "cube1" };
+	protected static final BufferedImage tileset = Level.images.get("tileset.cube1");
+	protected static final String id = "cube1";
 	protected static final int size = 16;
 	protected static final int layer = 0;
 

@@ -57,6 +57,9 @@ public class Cartridge extends trinity.Level {
 		images.put("checker", Render.loadImage("checker.png"));
 		images.put("tileset.wall1", Render.loadImage("tileset/wall1.png"));
 		images.put("tileset.wall2", Render.loadImage("tileset/wall2.png"));
+		images.put("tileset.cube1", Render.loadImage("tileset/cube1.png"));
+		images.put("tileset.cube2", Render.loadImage("tileset/cube2.png"));
+		images.put("tileset.cube3", Render.loadImage("tileset/cube3.png"));
 		images.put("tileset.void", Render.loadImage("tileset/void.png"));
 		images.put("pointer2", Render.loadImage("pointer.png"));
 		images.put("chain", Render.loadImage("chain.png"));
@@ -67,30 +70,33 @@ public class Cartridge extends trinity.Level {
 		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(100, 10)));
 		
 	
-		currentLevel.tiles.add(new Void(0, 0));
-		currentLevel.tiles.add(new Void(1, 0));
-		currentLevel.tiles.add(new Void(2, 0));
-		currentLevel.tiles.add(new Void(3, 0));
-		currentLevel.tiles.add(new Void(4, 0));
-		currentLevel.tiles.add(new Void(-1, 1));
-		currentLevel.tiles.add(new Wall1(0, 1));
-		currentLevel.tiles.add(new Wall1(1, 1));
-		currentLevel.tiles.add(new Wall1(2, 1));
-		currentLevel.tiles.add(new Wall1(3, 1));
-		currentLevel.tiles.add(new Wall1(4, 1));
-		currentLevel.tiles.add(new Void(5, 1));
-		currentLevel.tiles.add(new Void(-1, 2));
-		currentLevel.tiles.add(new Wall1(0, 2));
-		currentLevel.tiles.add(new Wall1(1, 2));
-		currentLevel.tiles.add(new Wall1(2, 2));
-		currentLevel.tiles.add(new Wall1(3, 2));
-		currentLevel.tiles.add(new Wall1(4, 2));
-		currentLevel.tiles.add(new Void(5, 2));
-		currentLevel.tiles.add(new Wall2(0, 3));
-		currentLevel.tiles.add(new Wall2(1, 3));
-		currentLevel.tiles.add(new Wall2(2, 3));
-		currentLevel.tiles.add(new Wall2(3, 3));
-		currentLevel.tiles.add(new Wall2(4, 3));
+		currentLevel.tiles.add(new Void(new Twin(0,0)));
+		currentLevel.tiles.add(new Void(new Twin(1, 0)));
+		currentLevel.tiles.add(new Void(new Twin(2, 0)));
+		currentLevel.tiles.add(new Void(new Twin(3, 0)));
+		currentLevel.tiles.add(new Void(new Twin(4, 0)));
+		currentLevel.tiles.add(new Void(new Twin(-1, 1)));
+		currentLevel.tiles.add(new Wall1(new Twin(0, 1)));
+		currentLevel.tiles.add(new Wall1(new Twin(1, 1)));
+		currentLevel.tiles.add(new Wall1(new Twin(2, 1)));
+		currentLevel.tiles.add(new Wall1(new Twin(3, 1)));
+		currentLevel.tiles.add(new Wall1(new Twin(4, 1)));
+		currentLevel.tiles.add(new Void(new Twin(5, 1)));
+		currentLevel.tiles.add(new Void(new Twin(-1, 2)));
+		currentLevel.tiles.add(new Wall1(new Twin(0, 2)));
+		currentLevel.tiles.add(new Wall1(new Twin(1, 2)));
+		currentLevel.tiles.add(new Wall1(new Twin(2, 2)));
+		currentLevel.tiles.add(new Wall1(new Twin(3, 2)));
+		currentLevel.tiles.add(new Wall1(new Twin(4, 2)));
+		currentLevel.tiles.add(new Void(new Twin(5, 2)));
+		currentLevel.tiles.add(new Wall2(new Twin(0, 3)));
+		currentLevel.tiles.add(new Wall2(new Twin(1, 3)));
+		currentLevel.tiles.add(new Wall2(new Twin(2, 3)));
+		currentLevel.tiles.add(new Wall2(new Twin(3, 3)));
+		currentLevel.tiles.add(new Wall2(new Twin(4, 3)));
+		
+		
+
 		
 
 
