@@ -2,7 +2,6 @@
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.net.MalformedURLException;
 
 import trinity.Game;
 import trinity.Key;
@@ -17,14 +16,7 @@ public class Cartridge extends trinity.Level {
 	{
 
 		clear();
-
-		try {
-			Game.getThing("Pawn", "/Users/josh/eclipse-workspace/low_battery/bin/");
-			Game.getThing("Player", "/Users/josh/eclipse-workspace/low_battery/bin/");
-			Game.getThing("Bullet", "/Users/josh/eclipse-workspace/low_battery/bin/");
-		} catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		Key.resetKeys();
 		Render.fixDisplay(new Dimension(200, 100));
 
 		Game.currentName = "low_battery";
@@ -63,46 +55,41 @@ public class Cartridge extends trinity.Level {
 		images.put("tileset.void", Render.loadImage("tileset/void.png"));
 		images.put("pointer2", Render.loadImage("pointer.png"));
 		images.put("chain", Render.loadImage("chain.png"));
-		images.put("laser", Render.loadImage("laser2.png"));
+		images.put("laser", Render.loadImage("laser.png"));
 		levels.put("Menu", new Level());
 		currentLevel = levels.get("Menu");
 		currentLevel.entities.add(new Player(new Twin(50, 50)));
-		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(100, 10)));
-		
-	
-		currentLevel.tiles.add(new Void(new Twin(0,0)));
-		currentLevel.tiles.add(new Void(new Twin(1, 0)));
-		currentLevel.tiles.add(new Void(new Twin(2, 0)));
-		currentLevel.tiles.add(new Void(new Twin(3, 0)));
-		currentLevel.tiles.add(new Void(new Twin(4, 0)));
-		currentLevel.tiles.add(new Void(new Twin(-1, 1)));
-		currentLevel.tiles.add(new Wall1(new Twin(0, 1)));
-		currentLevel.tiles.add(new Wall1(new Twin(1, 1)));
-		currentLevel.tiles.add(new Wall1(new Twin(2, 1)));
-		currentLevel.tiles.add(new Wall1(new Twin(3, 1)));
-		currentLevel.tiles.add(new Wall1(new Twin(4, 1)));
-		currentLevel.tiles.add(new Void(new Twin(5, 1)));
-		currentLevel.tiles.add(new Void(new Twin(-1, 2)));
-		currentLevel.tiles.add(new Wall1(new Twin(0, 2)));
-		currentLevel.tiles.add(new Wall1(new Twin(1, 2)));
-		currentLevel.tiles.add(new Wall1(new Twin(2, 2)));
-		currentLevel.tiles.add(new Wall1(new Twin(3, 2)));
-		currentLevel.tiles.add(new Wall1(new Twin(4, 2)));
-		currentLevel.tiles.add(new Void(new Twin(5, 2)));
-		currentLevel.tiles.add(new Wall2(new Twin(0, 3)));
-		currentLevel.tiles.add(new Wall2(new Twin(1, 3)));
-		currentLevel.tiles.add(new Wall2(new Twin(2, 3)));
-		currentLevel.tiles.add(new Wall2(new Twin(3, 3)));
-		currentLevel.tiles.add(new Wall2(new Twin(4, 3)));
+		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(10, 10)));
 		
 		
-
+//		Tile.addTile(new Void(), new Twin(1,0), currentLevel.tiles);
+//		Tile.addTile(new Void(), new Twin(2,0), currentLevel.tiles);
+//		Tile.addTile(new Void(), new Twin(3,0), currentLevel.tiles);
+//		Tile.addTile(new Void(), new Twin(4,0), currentLevel.tiles);
+//		
+//		
+//		Tile.addTile(new Void(), new Twin(0,1), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(1,1), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(2,1), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(3,1), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(4,1), currentLevel.tiles);
+//		Tile.addTile(new Void(), new Twin(5,1), currentLevel.tiles);
+//		
+//		
+//		Tile.addTile(new Void(), new Twin(0,2), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(1,2), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(2,2), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(3,2), currentLevel.tiles);
+//		Tile.addTile(new Wall1(), new Twin(4,2), currentLevel.tiles);
+//		Tile.addTile(new Void(), new Twin(5,2), currentLevel.tiles);
+//		
+//		Tile.addTile(new Wall2(), new Twin(1,3), currentLevel.tiles);
+//		Tile.addTile(new Wall2(), new Twin(2,3), currentLevel.tiles);
+//		Tile.addTile(new Wall2(), new Twin(3,3), currentLevel.tiles);
+//		Tile.addTile(new Wall2(), new Twin(4,3), currentLevel.tiles);
 		
-
-
-		for (Tile t : currentLevel.tiles) {
-			t.Update();
-		}
+		Tile.update(currentLevel.tiles);
+		
 		Key.keys.add(new Key(KeyEvent.VK_UP, "up", false));
 		Key.keys.add(new Key(KeyEvent.VK_DOWN, "down", false));
 		Key.keys.add(new Key(KeyEvent.VK_LEFT, "left", false));

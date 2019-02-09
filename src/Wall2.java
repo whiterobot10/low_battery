@@ -10,7 +10,6 @@ public class Wall2 extends Tile {
 	protected static final String[] connectableIds = { "wall2" };
 	protected static final BufferedImage tileset = Level.images.get("tileset.wall2");
 	protected static final String id = "wall2";
-	protected static final int size = 16;
 	protected static final int layer = 0;
 
 	public String[] getConnectableIds() {
@@ -25,20 +24,12 @@ public class Wall2 extends Tile {
 		return id;
 	}
 
-	public int getSize() {
-		return size;
-	}
-
 	public int getLayer() {
 		return layer;
 	}
 
-	public Wall2() {
-		this(new Twin(0, 0));
-	}
 
-	public Wall2(Twin pos) {
-		super(pos);
+	public Wall2() {
 
 	}
 
