@@ -22,9 +22,10 @@ public class Player extends Pawn {
 
 	static Segment[] arm = new Segment[8];
 
-	static Segment head = new Segment(Level.images.get("player.head"));
+	static Segment head = new Segment(Level.images.get("pawn.player.head"));
 	static Segment laser = new Segment(Level.images.get("laser"));
-	static Segment body = new Segment(Level.images.get("player.body"));
+	static Segment body = new Segment(Level.images.get("pawn.player.body"));
+	
 
 	static Segment[] leg = new Segment[2];
 
@@ -41,10 +42,10 @@ public class Player extends Pawn {
 	public Player(Twin pos) {
 		super(pos, 0, 0, 1f, 0);
 		for (int i = 0; i < 8; i++) {
-			arm[i] = new Segment(Level.images.get("player.arm." + i));
+			arm[i] = new Segment(Level.images.get("pawn.player.arm." + i));
 		}
 		for (int i = 0; i < 2; i++) {
-			leg[i] = new Segment(Level.images.get("player.leg." + i));
+			leg[i] = new Segment(Level.images.get("pawn.player.leg." + i));
 			leg2[i] = Level.images.get("crawler.leg." + i);
 		}
 	}
@@ -63,14 +64,24 @@ public class Player extends Pawn {
 		if (Key.getKey("right").held || Key.getKey("right_2").held) {
 			target.x += 30;
 		}
-
+		
+		vel=pos.getTwordsAmount(target, Math.min(speed.value, 3f));
+		move(vel);
+		
 		if (Key.getKey("click").pressed) {
-			Level.newEntities.add(new Bullet(pos.getTwords(Key.mousePos, 10), pos.getTwordsAmount(Key.mousePos, 5f)));
+//			System.out.println("f");
+//			System.out.println();
+//			Twin foo = pos.getTwordsAmount(Key.mousePos, 1f);
+//			System.out.println(foo);
+//			System.out.println(foo.offset(vel));
+			//System.out.println(vel.fix());
+			Level.newEntities.add(new Bullet(pos.getTwords(Key.mousePos, 10), pos.getTwordsAmount(Key.mousePos, 3)));
 			//System.out.println(pos.getTwords(Key.mousePos, 2).x + " " + pos.getTwords(Key.mousePos, 2).y);
 			//System.out.println(pos.x + " " + pos.y);
-			System.out.println(pos.getTwordsAmount(Key.mousePos, 1));
+			//System.out.println(pos.getTwordsAmount(Key.mousePos, 1));
 		}
-		moveTwords(target, Math.min(speed.value, 3f));
+		
+		
 		if (pos.distance(target) > 1) {
 
 			walkCycle += speed.value;
@@ -175,7 +186,7 @@ public class Player extends Pawn {
 
 	@Override
 	public Shape hitbox() {
-		return new Ellipse2D.Double(pos.x - 4, pos.y + 3, 8, 4);
+		return new Ellipse2D.Double(pos.x - 4, pos.y + 2, 8, 4);
 	}
 
 }

@@ -29,7 +29,8 @@ public class Pawn extends trinity.Entity {
 
 	@Override
 	public void update() {
-		moveTwords(target, Math.min(speed.value, 3f));
+		vel=pos.getTwordsAmount(target, Math.min(speed.value, 3f));
+		move(vel);
 		target.x = pos.x;
 		target.y = pos.y;
 

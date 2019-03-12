@@ -12,7 +12,7 @@ import trinity.Segment;
 import trinity.Twin;
 
 public class Bullet extends trinity.Entity {
-	static Segment laser = new Segment(Level.images.get("laser"));
+	static Segment laser = new Segment(Level.images.get("bullet1"));
 
 	public Bullet() {
 		this(new Twin(0, 0), new Twin(0, 0));
@@ -37,7 +37,7 @@ public class Bullet extends trinity.Entity {
 					
 				}
 			}
-			System.out.println("foo");
+			//System.out.println("foo");
 			remove = true;
 		}
 
@@ -50,7 +50,7 @@ public class Bullet extends trinity.Entity {
 	public Bullet(Twin pos, Twin vel) {
 		super(pos, true);
 		this.vel = vel;
-		solid = true;
+		solid = false;
 		rotation = vel.getRot();
 	}
 
