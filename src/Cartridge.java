@@ -65,8 +65,8 @@ public class Cartridge extends trinity.Level {
 		importImage("laser.png");
 		importImage("bullet1.png");
 		
-		levels.put("Menu", new Level());
-		currentLevel = levels.get("Menu");
+		levels.add(new Level());
+		currentLevel = levels.get(0);
 		currentLevel.entities.add(new Player(new Twin(50, 50)));
 		currentLevel.walls.add(new Wall(new Twin(30, 30), new Twin(10, 10)));
 		
