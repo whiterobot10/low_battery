@@ -12,7 +12,8 @@ import trinity.Segment;
 import trinity.Twin;
 
 public class Bullet extends trinity.Entity {
-	static Segment laser = new Segment(Level.images.get("bullet1"));
+	static Segment laser = new Segment(Level.images.get("bullet1"),4);
+	static Segment bolt = new Segment(Level.images.get("bolt"),4);
 
 	public Bullet() {
 		this(new Twin(0, 0), new Twin(0, 0));
@@ -52,18 +53,22 @@ public class Bullet extends trinity.Entity {
 		this.vel = vel;
 		solid = false;
 		rotation = vel.getRot();
+		if(rotation<0) {
+			rotation+=360;
+		}
 	}
 
 	@Override
 	public void draw(Graphics2D g, int layer) {
 		if (layer == 2) {
-			laser.Draw(g, pos, new Twin(0, 0), true, rotation+90);
+			
 			if (Game.debug) {
 				g.setColor(Color.red);
 				g.draw(hitbox());
 				g.setColor(Color.red);
 				g.fillRect((int) pos.x - 1, (int) pos.y - 1, 2, 2);
 			}
+			laser.Draw(g, pos, null, null, (int)Math.round(rotation/22.5));
 		}
 	}
 }

@@ -64,6 +64,8 @@ public class Cartridge extends trinity.Level {
 		importImage("chain.png");
 		importImage("laser.png");
 		importImage("bullet1.png");
+		importImage("loud_stick.png");
+		importImage("bolt.png");
 		
 		levels.add(new Level());
 		currentLevel = levels.get(0);

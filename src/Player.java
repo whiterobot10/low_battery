@@ -20,17 +20,18 @@ public class Player extends Pawn {
 
 	float walkCycle = 0;
 
-	static Segment[] arm = new Segment[8];
-
-	static Segment head = new Segment(Level.images.get("pawn.player.head"));
-	static Segment laser = new Segment(Level.images.get("laser"));
-	static Segment body = new Segment(Level.images.get("pawn.player.body"));
-
-	static Segment[] leg = new Segment[2];
+	static Segment head = new Segment(Level.images.get("pawn.player.head"), 1);
+	static Segment laser = new Segment(Level.images.get("laser"), 4);
+	static Segment body = new Segment(Level.images.get("pawn.player.body"), 1);
+	static Segment loud_stick = new Segment(Level.images.get("loud_stick"), 4, new Twin(0, 0));
+	static Segment front_arm = new Segment(Level.images.get("pawn.player.arm.0"), 4);
+	static Segment back_arm = new Segment(Level.images.get("pawn.player.arm.4"), 4);
+	static Segment front_leg = new Segment(Level.images.get("pawn.player.leg.0"), 1);
+	static Segment back_leg = new Segment(Level.images.get("pawn.player.leg.1"), 1);
 
 	static BufferedImage head2 = Level.images.get("crawler.head");
 
-	static BufferedImage[] leg2 = new BufferedImage[2];
+	// static BufferedImage[] leg2 = new BufferedImage[2];
 
 	int i = 0;
 
@@ -40,25 +41,23 @@ public class Player extends Pawn {
 
 	public Player(Twin pos) {
 		super(pos, 0, 0, 1f, 0);
-		for (int i = 0; i < 8; i++) {
-			arm[i] = new Segment(Level.images.get("pawn.player.arm." + i));
-		}
-		for (int i = 0; i < 2; i++) {
-			leg[i] = new Segment(Level.images.get("pawn.player.leg." + i));
-			leg2[i] = Level.images.get("crawler.leg." + i);
+		for (int i = 1; i < 4; i++) {
+			front_arm.setRotatedImage(i, Level.images.get("pawn.player.arm." + i));
+			back_arm.setRotatedImage(i, Level.images.get("pawn.player.arm." + (i + 4)));
 		}
 	}
 
 	@Override
 	public void update() {
 
-		if (pos.x + Render.scroll.getTranslateX() > (Render.getGameSize().x-Render.scrollOffset.x)) {
-			Render.scroll.translate((Render.getGameSize().x-Render.scrollOffset.x)-(pos.x + Render.scroll.getTranslateX()), 0);
+		if (pos.x + Render.scroll.getTranslateX() > (Render.getGameSize().x - Render.scrollOffset.x)) {
+			Render.scroll.translate(
+					(Render.getGameSize().x - Render.scrollOffset.x) - (pos.x + Render.scroll.getTranslateX()), 0);
 		}
 		if (pos.x + Render.scroll.getTranslateX() < Render.scrollOffset.x) {
-			Render.scroll.translate((Render.scrollOffset.x)-(pos.x + Render.scroll.getTranslateX()), 0);
+			Render.scroll.translate((Render.scrollOffset.x) - (pos.x + Render.scroll.getTranslateX()), 0);
 		}
-		
+
 		if (Key.getKey("up").held || Key.getKey("up_2").held) {
 			target.y -= 30;
 		}
@@ -82,7 +81,7 @@ public class Player extends Pawn {
 //			System.out.println(foo);
 //			System.out.println(foo.offset(vel));
 			// System.out.println(vel.fix());
-			Level.newEntities.add(new Bullet(pos.getTwords(Key.mousePos, 10), pos.getTwordsAmount(Key.mousePos, 3)));
+			Level.newEntities.add(new Bullet(pos.getTwords(Key.mousePos, 10), pos.getTwordsAmount(Key.mousePos, 3f)));
 			// System.out.println(pos.getTwords(Key.mousePos, 2).x + " " +
 			// pos.getTwords(Key.mousePos, 2).y);
 			// System.out.println(pos.x + " " + pos.y);
@@ -112,22 +111,6 @@ public class Player extends Pawn {
 	@Override
 	public void draw(Graphics2D g, int layer) {
 		super.draw(g, layer);
-		if (layer == 1) {
-			if (walkCycle == 0) {
-				drawSegment(g, leg2[0], new Twin(2, 23), 0);
-				drawSegment(g, leg2[0], new Twin(0, 24), 0);
-			} else if (walkCycle > 7) {
-				drawSegment(g, leg2[0], new Twin(2, 22), 0);
-				drawSegment(g, leg2[0], new Twin(0, 24), 0);
-			} else {
-				drawSegment(g, leg2[0], new Twin(2, 23), 0);
-				drawSegment(g, leg2[0], new Twin(0, 23), 0);
-			}
-			drawSegment(g, leg2[1], new Twin(-3, 23), 0);
-
-			drawSegment(g, head2, new Twin(0, 20), 0);
-
-		}
 
 		if (layer == 3) {
 
@@ -141,29 +124,39 @@ public class Player extends Pawn {
 //				drawSegment(g, leg[0], new Twin(-1, 1), 0);
 //				drawSegment(g, leg[1], new Twin(2, 2), 0);
 //			}
-			left = Key.mousePos.x < pos.x;
+			scale.x = Key.mousePos.x < pos.x ? -1 : 1;
 			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 
-			leg[0].Draw(g, pos, new Twin(-1, walkCycle > 7 ? 3 : 4), left, 0);
-			leg[1].Draw(g, pos, new Twin(2, (walkCycle < 7 && walkCycle > 0) ? 3 : 4), left, 0);
+			front_leg.Draw(g, pos, new Twin(-1, walkCycle > 7 ? 2 : 3), scale, 0);
+			back_leg.Draw(g, pos, new Twin(2, (walkCycle < 7 && walkCycle > 0) ? 2 : 3), scale, 0);
 
 			int foo = pos.rotBreak(Key.mousePos, 16, 0f);
 			if (foo > 8) {
 				foo = Math.abs(foo - 16);
 			}
 
-			arm[(foo % 4) + 4].Draw(g, pos, new Twin(3, 0), left, (foo / 4) * 90);
+			g.setColor(Color.red);
+			g.drawLine(pos.ix(), pos.iy() - 10, pos.ix(), pos.iy() + 10);
+
+			back_arm.Draw(g, pos, new Twin(3, 0), scale, (int) Math.round(Math.abs(pos.getRot(Key.mousePos)) / back_arm.degreesPerRot));
+			// arm[(foo % 4) + 4].Draw(g, pos, new Twin(3, 0), left, (foo / 4) * 90);
 			// System.out.println(pos.rotBreak(Key.mousePos, 16, 0f)*Math.PI*2);
 			// drawSegment(g, arm[Math.abs(pos.rotBreak(Key.mousePos, 16, 0f)) % 4 + 4], new
 			// Twin(3, -1),
 			// pos.rotBreak(Key.mousePos, 16, 0f) / 4);
-			body.Draw(g, pos, new Twin(0, 0), left, 0);
+			body.Draw(g, pos, new Twin(0, 0), scale, 0);
 
-			head.Draw(g, pos, new Twin(0, -4), left, 0);
+			head.Draw(g, pos, new Twin(0, -4), scale, 0);
 			// Math.PI/100*i++);
 			// drawSegment(g, head, new Twin(0, -5), 0);
-			arm[foo % 4].Draw(g, pos, new Twin(-2, 0), left, (foo / 4) * 90);
+			// arm[foo % 4].Draw(g, pos, new Twin(-2, 0), left, (foo / 4) * 90);
 			// (foo/4.0)*90);
+			front_arm.Draw(g, pos, new Twin(-2, 0), scale, (int) Math.round(Math.abs(pos.getRot(Key.mousePos)) / front_arm.degreesPerRot));
+			loud_stick.Draw(g, pos, new Twin(-2, 0), scale,
+					(int) Math.round(Math.abs(pos.getRot(Key.mousePos)) / loud_stick.degreesPerRot));
+			
+			
+			System.out.println(loud_stick.degreesPerRot);
 
 			// drawSegment(g, arm[Math.abs(pos.rotBreak(Key.mousePos, 16, 0f)) % 4], new
 			// Twin(-2, -1),
